@@ -1,0 +1,47 @@
+﻿<Window x:Class="MVVM_Quest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVM_Quest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0">
+            <Label Content="ShopId"/>
+            <TextBox x:Name="ShopId_TextBox" Width="50" HorizontalAlignment="Left" Margin="5 5 5 5"
+                    Text="{Binding ElementName=ShopGrid,Path=SelectedItem.ShopId}"/>
+            <Label Content="Name"/>
+            <TextBox x:Name="Name_TextBox" Width="150" HorizontalAlignment="Left" Margin="5 5 5 5"
+                     Text="{Binding ElementName=ShopGrid,Path=SelectedItem.Name}"/>
+            <Label Content="City"/>
+            <TextBox x:Name="City_TextBox" Width="150" HorizontalAlignment="Left" Margin="5 5 5 5"
+                     Text="{Binding ElementName=ShopGrid,Path=SelectedItem.City}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+            <Button x:Name="Add_btn" Content="Add Shop"  Command="{Binding InsertCommand}" Margin="5 5 5 5"/>
+            <Button x:Name="Update_btn" Content="Update Shop" Command="{Binding Path=UpdateCommand}" Margin="5 5 5 5"/>
+
+        </StackPanel>
+        <ListView Name="ShopGrid" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" ItemsSource="{Binding Shops}" 
+                  SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
+            <ListView.View>
+                <GridView x:Name="grdTest">
+                    <GridViewColumn Header="ShopId" DisplayMemberBinding="{Binding ShopId}"  Width="50"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"  Width="150" />
+                    <GridViewColumn Header="City" DisplayMemberBinding="{Binding City}" Width="200" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
